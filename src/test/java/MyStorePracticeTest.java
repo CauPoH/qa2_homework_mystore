@@ -1,18 +1,29 @@
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MyStorePracticeTest {
     private final By HOME_PAGE_CATEGORY = By.xpath(".//a[@class = 'sf-with-ul']");
+    private final By WOOMEN_LEFT_COLUMN_CATEORY = By.xpath(".//a[contains(@class, 'category')]");
+    private final By WOOMEN_BODY_CATEORY = By.xpath(".//a[@class = 'subcategory-name']");
 
 
     @Test
-    public void categoryHtmlAndMobileTest() {
+    public void categoryHtmlTest() {
 
         //Open browser
         System.setProperty("webdriver.chrome.driver", "c:/chromedriver.exe");
+
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
@@ -20,35 +31,45 @@ public class MyStorePracticeTest {
         //Open MyStore home page
         driver.get("http://automationpractice.com");
 
-        //Find first article title
+        //Find category title
         WebElement homePageCategory = driver.findElement(HOME_PAGE_CATEGORY);
 
         //Open Women category page
+        homePageCategory.click();
 
+        //Find 1 left column category
+        WebElement leftColumnTitle1 = driver.findElements(WOOMEN_LEFT_COLUMN_CATEORY).get(0);
 
-        //Save to String
-        // String titleToCompare = homePageTitle.getText();
+        //Save to String 1 column category
+        String leftTitleToCompare1 = leftColumnTitle1.getText();
 
-        //Find comments count
-        // WebElement homePageComments = driver.findElement(HOME_PAGE_COMMENTS);
+        //Find 2 left column category
+        WebElement leftColumnTitle2 = driver.findElements(WOOMEN_LEFT_COLUMN_CATEORY).get(1);
 
-        //Save to integer
-        //  String comentsToParse = homePageComments.getText(); // получим (1)
-        //  comentsToParse = comentsToParse.substring(1, comentsToParse.length() - 1);
-        // Integer commentsToCompare = Integer.valueOf(comentsToParse); //peredelali rezuljta v cifru i zapisali
+        //Save to String 2 column category
+        String leftTitleToCompare2 = leftColumnTitle2.getText();
 
+        //Find 1 body category
+        WebElement bodyTitle1 = driver.findElements(WOOMEN_BODY_CATEORY).get(0);
 
-        //Open article page
-        //Find Title
-        //Check title
-        //Find comments count
-        //Check comments count
-        //Open comments page
-        //Find title
-        //Check title
-        //Get comment count
-        //Check comment count
-        //Close browser
+        //Save to String 1 body category
+        String bodyTitleToCompare1 = bodyTitle1.getText();
+
+        //Find 2 body category
+        WebElement bodyTitle2 = driver.findElements(WOOMEN_BODY_CATEORY).get(1);
+
+        //Save to String 2 body category
+        String bodyTitleToCompare2 = bodyTitle2.getText();
+
+        //Check first title
+        Assertions.assertEquals(leftTitleToCompare1, bodyTitleToCompare1, "First titles are not matching!");
+
+        //Check second title
+        Assertions.assertEquals(leftTitleToCompare2, bodyTitleToCompare2, "Second titles are not matching!");
+
+        //Close window
+        driver.close();
+
 
     }
 }
