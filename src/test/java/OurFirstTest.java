@@ -24,6 +24,6 @@ public class OurFirstTest {
         System.out.println("C is: " + c + " \nD is: " + d);
 
 //        Assertions.assertEquals(20, c, "wrong!");
-        Assertions.assertEquals(21, c, "wrong!");
+        Assertions.assertEquals(20, c, "wrong!");
     }
 }
