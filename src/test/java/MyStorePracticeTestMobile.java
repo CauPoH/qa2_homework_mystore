@@ -16,7 +16,7 @@ import java.util.Map;
         private final By MOBILE_HOME_PAGE_CATEGORY = By.xpath(".//div[@class = 'cat-title']");
         private final By MOBILE_WOMEN_CATEGORY_PAGE = By.xpath(".//li[contains(@class, '')]/a");
         private final By MOBILE_WOOMEN_LEFT_COLUMN_CATEORY = By.xpath(".//h2[contains(@class,  'title')]");
-        private final By MOBILE_WOOMEN_LEFT_COLUMN_CATEORY1 = By.xpath(".//li[contains(@class, '')]/a");
+        private final By MOBILE_WOOMEN_LEFT_COLUMN_CATEORY1 = By.xpath(".//ul[contains(@class,  'tree dynamized')]/li/a");
         private final By MOBILE_WOOMEN_BODY_CATEORY = By.xpath(".//a[contains(@class, 'subcategory-name')]");
 
 
