@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class MyStorePracticeTest {
     private final By HOME_PAGE_CATEGORY = By.xpath(".//a[@class = 'sf-with-ul']");
-    private final By WOOMEN_LEFT_COLUMN_CATEORY = By.xpath(".//a[contains(@class, 'category')]");
-    private final By WOOMEN_BODY_CATEORY = By.xpath(".//a[@class = 'subcategory-name']");
+    private final By WOMEN_LEFT_COLUMN_CATEGORY = By.xpath(".//li[@class ='nomargin hiddable col-lg-6']/label/a");
+    private final By WOMEN_BODY_CATEGORY = By.xpath(".//a[@class = 'subcategory-name']");
 
 
     @Test
@@ -38,25 +38,25 @@ public class MyStorePracticeTest {
         homePageCategory.click();
 
         //Find 1 left column category
-        WebElement leftColumnTitle1 = driver.findElements(WOOMEN_LEFT_COLUMN_CATEORY).get(0);
+        WebElement leftColumnTitle1 = driver.findElements(WOMEN_LEFT_COLUMN_CATEGORY).get(0);
 
         //Save to String 1 column category
-        String leftTitleToCompare1 = leftColumnTitle1.getText();
+        String leftTitleToCompare1 = leftColumnTitle1.getText().substring(0,leftColumnTitle1.getText().length()-4);
 
         //Find 2 left column category
-        WebElement leftColumnTitle2 = driver.findElements(WOOMEN_LEFT_COLUMN_CATEORY).get(1);
+        WebElement leftColumnTitle2 = driver.findElements(WOMEN_LEFT_COLUMN_CATEGORY).get(1);
 
         //Save to String 2 column category
-        String leftTitleToCompare2 = leftColumnTitle2.getText();
+        String leftTitleToCompare2 = leftColumnTitle2.getText().substring(0,leftColumnTitle2.getText().length()-4);
 
         //Find 1 body category
-        WebElement bodyTitle1 = driver.findElements(WOOMEN_BODY_CATEORY).get(0);
+        WebElement bodyTitle1 = driver.findElements(WOMEN_BODY_CATEGORY).get(0);
 
         //Save to String 1 body category
         String bodyTitleToCompare1 = bodyTitle1.getText();
 
         //Find 2 body category
-        WebElement bodyTitle2 = driver.findElements(WOOMEN_BODY_CATEORY).get(1);
+        WebElement bodyTitle2 = driver.findElements(WOMEN_BODY_CATEGORY).get(1);
 
         //Save to String 2 body category
         String bodyTitleToCompare2 = bodyTitle2.getText();

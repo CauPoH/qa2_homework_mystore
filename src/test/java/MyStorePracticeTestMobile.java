@@ -15,10 +15,9 @@ import java.util.Map;
     public class MyStorePracticeTestMobile {
         private final By MOBILE_HOME_PAGE_CATEGORY = By.xpath(".//div[@class = 'cat-title']");
         private final By MOBILE_WOMEN_CATEGORY_PAGE = By.xpath(".//li[contains(@class, '')]/a");
-        private final By MOBILE_WOOMEN_LEFT_COLUMN_CATEORY = By.xpath(".//h2[contains(@class,  'title')]");
-        private final By MOBILE_WOOMEN_LEFT_COLUMN_CATEORY1 = By.xpath(".//ul[contains(@class,  'tree dynamized')]/li/a");
-        private final By MOBILE_WOOMEN_BODY_CATEORY = By.xpath(".//a[contains(@class, 'subcategory-name')]");
-
+        private final By MOBILE_WOMEN_CATEGORY = By.id("categories_block_left");
+        private final By MOBILE_WOMEN_CATEGORY_LIST = By.xpath(".//ul[contains(@class, 'tree dynamized')]/li/a");
+        private final By MOBILE_WOMEN_BODY_CATEGORY = By.xpath(".//a[contains(@class, 'subcategory-name')]");
 
         @Test
         public void MyStoreMobileTest() {
@@ -26,14 +25,15 @@ import java.util.Map;
             //Open browser
             System.setProperty("webdriver.chrome.driver", "c:/chromedriver.exe");
             //Mobile
-            Map<String, String> mobileEmulation = new HashMap<String, String>();
-            mobileEmulation.put("deviceName", "Galaxy S5");
-            Map<String, Object> chromeOptions = new HashMap<String, Object>();
-            chromeOptions.put("mobileEmulation", mobileEmulation);
-            DesiredCapabilities capabilities= DesiredCapabilities.chrome();
-            capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
-            WebDriver driver= new ChromeDriver(capabilities);
-
+            Map<String, Object> deviceMetrics = new HashMap<String, Object>();
+            deviceMetrics.put("width", 360);
+            deviceMetrics.put("height", 640);
+            deviceMetrics.put("pixelRatio",3.0);
+            Map<String, Object> mobileEmulation = new HashMap<String, Object>();
+            mobileEmulation.put("deviceMetrics", deviceMetrics);
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.setExperimentalOption("mobileEmulation",mobileEmulation);
+            WebDriver driver= new ChromeDriver(chromeOptions);
 
             //Open MyStore home page
             driver.get("http://automationpractice.com");
@@ -51,33 +51,32 @@ import java.util.Map;
             mobileWomenCategoryPage.click();
 
             //Find women category title
-            WebElement mobileWomenPageCategory = driver.findElement(MOBILE_WOOMEN_LEFT_COLUMN_CATEORY);
+            WebElement mobileWomenPageCategory = driver.findElement(MOBILE_WOMEN_CATEGORY);
 
             //Click women category on women page
             mobileWomenPageCategory.click();
 
 
-            //Find 1 left column category
-            WebElement leftMobileColumnTitle1 = driver.findElements(MOBILE_WOOMEN_LEFT_COLUMN_CATEORY1).get(0);
+            //Find 1 women category item
+            WebElement leftMobileColumnTitle1 = driver.findElements(MOBILE_WOMEN_CATEGORY_LIST).get(0);
 
-            //Save to String 1 column category
+            //Save to String 1 women category item
             String mobileLeftTitleToCompare1 = leftMobileColumnTitle1.getText();
 
-            //Find 2 left column category
-            WebElement leftMobileColumnTitle2 = driver.findElements(MOBILE_WOOMEN_LEFT_COLUMN_CATEORY1).get(1);
+            //Find 2 women category item
+            WebElement leftMobileColumnTitle2 = driver.findElements(MOBILE_WOMEN_CATEGORY_LIST).get(1);
 
-            //Save to String 2 column category
+            //Save to String 2 women category item
             String mobileLeftTitleToCompare2 = leftMobileColumnTitle2.getText();
 
-
             //Find 1 body category
-            WebElement mobileBodyTitle1 = driver.findElements(MOBILE_WOOMEN_BODY_CATEORY).get(0);
+            WebElement mobileBodyTitle1 = driver.findElements(MOBILE_WOMEN_BODY_CATEGORY).get(0);
 
             //Save to String 1 body category
             String mobileBodyTitleToCompare1 = mobileBodyTitle1.getText();
 
             //Find 2 body category
-            WebElement mobileBodyTitle2 = driver.findElements(MOBILE_WOOMEN_BODY_CATEORY).get(1);
+            WebElement mobileBodyTitle2 = driver.findElements(MOBILE_WOMEN_BODY_CATEGORY).get(1);
 
             //Save to String 2 body category
             String mobileBodyTitleToCompare2 = mobileBodyTitle2.getText();
@@ -90,7 +89,6 @@ import java.util.Map;
 
             //Close window
             driver.close();
-
 
         }
     }
